@@ -18,6 +18,7 @@ unitid = request.form("unitid")
 workposition = request.form("workposition")
 positiontype = request.form("positiontype")
 technicid = request.form("technicid")
+manager = request.form("manager")
 //app_id_req = request.form("app_id")
 
 
@@ -45,13 +46,22 @@ technicid = request.form("technicid")
 	
 		
 	//create file log
-	file_name = "../log/" & datetimestamp &"_updempwork_api.log"
+	file_name = "../log/" & datetimestamp &"_updempwork_api_" & sapid & ".log"
+	
+	//file_err = "../log/" & datetimestamp &"_updempwork_api_err.log"
 	  
 	  	//response.write(file_name)
 		//response.write("<br>")
+	
+	
+	
 	Dim objFSO, objStream,i
 	Set objFSO = Server.CreateObject("Scripting.FileSystemObject")
 	Set objStream = objFSO.CreateTextFile(Server.MapPath(file_name),true)	
+	
+	//Dim objFSOErr,objStreamErr
+	//Set objFSOErr = Server.CreateObject("Scripting.FileSystemObject")
+	//Set objStreamErr = objFSOErr.CreateTextFile(Server.MapPath(file_err),true)	
  
 
 //connect DB
@@ -105,46 +115,34 @@ else
 	   positiontype = 0 
 	end if
 	
-		   file_image = "../emppic/u" & Request.Form("sapid") & ".jpg"
+	if Len(manager)<>0 then					
+		if manager = 6 then
+			technicid = 6 
+		end if
+	else
+		technicid = 0 
+	end if
+		   file_image = "emppic/u" & Request.Form("sapid") & ".jpg"
 	
 		
-		 sqlup = "UPDATE employee_content SET unitid = " & unitid & " , workposition=" & workposition & ", positiontype=" & positiontype & ", upddatetime= ' " & datetimestamp & "' , technicid=" & technicid & ",image= ' " & file_image & " ' WHERE sapid = " & sapid   
+		 sqlup = "UPDATE employee_content SET unitid = " & unitid & " , workposition=" & workposition & ", positiontype=" & positiontype & ", upddatetime= ' " & datetimestamp & "' , technicid=" & technicid & ",image= ' " & file_image & " '  WHERE sapid = " & sapid   
 		 //sqlup = "UPDATE employee_content SET unitid = " & unitid & " WHERE sapid = " & sapid  
 		
 		// response.write(sqlup)
 		// response.write("<br>")
+		
+	
 		 
 		 objStream.WriteLine("sqlup=" & sqlup)
 		
+			
 			Set recup = con.Execute(sqlup)
 			if err<>0 then
 			//	response.write("Error update permissions!")
+				 objStream.WriteLine("sqlup=" & sqlup)
 				 objStream.WriteLine("Error update permissions!")
 			end if
 
-	//	If Not rec.EOF Then 
-			//Response.write(rec.fields("app_name").value)
-			//Response.write(rec.fields("app_count").value)
-			//response.write("<br>")
-			
-				
-				
-				//update app_count
-				
-					
-					//sqlup = "UPDATE app_access SET app_count = '" & count_access & "' WHERE app_key like '" & key_login & "' " 
-					//Response.write(sqlup)
-					//response.write("<br>")
-					
-					//Set recup = con.Execute(sqlup)
-					//if err<>0 then
-					//	response.write("Error update permissions!")
-					//end if
-				
-			
-	//	Else 
-			//Response.Write("<script>alert('++Not Found application ++');window.history.back();</script>")
-	//	End If 
 
 	
 
@@ -158,5 +156,10 @@ End If
 	objStream.Close
 	Set objStream = Nothing
 	Set objFSO = Nothing
+	
+	//objStreamErr.Close
+	//Set objStreamErr = Nothing
+	//Set objFSOErr = Nothing
+	
 %>
 </body>

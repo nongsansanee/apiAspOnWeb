@@ -39,7 +39,7 @@ response.write("<br>")
 	
 		
 	//create file log
-	file_name = "../log/" & datetimestamp &"_delemp_api.log"
+	file_name = "../log/" & datetimestamp &"_updempwork_api_" & sapid & ".log"
 	  
 	  	//response.write(file_name)
 		//response.write("<br>")

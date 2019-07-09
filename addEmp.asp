@@ -57,7 +57,7 @@ positiondesc = request.form("positiondesc")
 	
 		
 	//create file log
-	file_name = "../log/" & datetimestamp &"_addemp_api.log"
+	file_name = "../log/" & datetimestamp &"_updempwork_api_" & sapid & ".log"
 	  
 	  	//response.write(file_name)
 		//response.write("<br>")
@@ -104,7 +104,7 @@ else
 	 
 	 //insert data to table employee_content
 	 
-	    file_image = "../emppic/u" & Request.Form("sapid") & ".jpg"
+	    file_image = "emppic/u" & Request.Form("sapid") & ".jpg"
 		//response.write(file_image)
 		//response.write("<br>")
 		
