@@ -31,6 +31,7 @@ lname_eng = request.form("lname_eng")
 empflag = request.form("empflag")
 userin = request.form("userin")
 positiondesc = request.form("positiondesc")
+//manager = request.form("manager")
 
 //sapid = 12345682
 
@@ -113,7 +114,7 @@ else
 		
 	 
 		sql_insert="INSERT INTO employee_content (sapid,positiondesc,"
-		sql_insert=sql_insert & "title,fname,lname,title_eng,fname_eng,lname_eng,adddatetime,image,empflag,sapid_mgt)"
+		sql_insert=sql_insert & "title,fname,lname,title_eng,fname_eng,lname_eng,adddatetime,image,empflag,manager_flag,sapid_mgt)"
 		sql_insert=sql_insert & " VALUES "
 		//sql_insert=sql_insert & "('" & Request.Form("sapid") & "',"
 		sql_insert=sql_insert & "(" & sapid & ","
@@ -126,9 +127,8 @@ else
 		sql_insert=sql_insert & "'" & Request.Form("lname_eng") & "',"
 		sql_insert=sql_insert & "'" & datetimestamp & "',"
 		sql_insert=sql_insert & "'" & file_image & "',"
-		//sql_insert=sql_insert & "'" & Request.Form("empflag") & "',"	
 		sql_insert=sql_insert & Request.Form("empflag") & ","	
-		//sql_insert=sql_insert & "'" & Request.Form("userin") & "')"
+		sql_insert=sql_insert & "1,"
 		sql_insert=sql_insert & Request.Form("userin") & ")"
 		 
 		// response.write(sql_insert)

@@ -115,17 +115,13 @@ else
 	   positiontype = 0 
 	end if
 	
-	if Len(manager)<>0 then					
-		if manager = 6 then
-			technicid = 6 
-		end if
-	else
-		technicid = 0 
+	if Len(manager) = 0 then					
+		manager = 0
 	end if
 		   file_image = "emppic/u" & Request.Form("sapid") & ".jpg"
 	
 		
-		 sqlup = "UPDATE employee_content SET unitid = " & unitid & " , workposition=" & workposition & ", positiontype=" & positiontype & ", upddatetime= ' " & datetimestamp & "' , technicid=" & technicid & ",image= ' " & file_image & " '  WHERE sapid = " & sapid   
+		 sqlup = "UPDATE employee_content SET unitid = " & unitid & " , workposition=" & workposition & ", positiontype=" & positiontype & ", upddatetime= ' " & datetimestamp & "' , technicid=" & technicid & ",image= '" & file_image & "' , manager_flag = " &  manager & "  WHERE sapid = " & sapid   
 		 //sqlup = "UPDATE employee_content SET unitid = " & unitid & " WHERE sapid = " & sapid  
 		
 		// response.write(sqlup)
